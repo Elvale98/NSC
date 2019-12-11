@@ -99,25 +99,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Operazione_timbratura decodeJsonOperazione(String operazioneJson) {
-        Operazione_timbratura operazione = new Operazione_timbratura();
-
-        try {
-            JSONObject jsonObj = new JSONObject(operazioneJson);
-
-            operazione.setIdOperazione(jsonObj.getString("IDOperazionee"));
-            operazione.setDataOperazione(jsonObj.getString("Data_Operazione"));
-            operazione.setOraOperazione(jsonObj.getString("Ora_Operazione"));
-            operazione.setIdDipendente(jsonObj.getString("idDipendente"));
-
-            return operazione;
-
-        } catch (JSONException e) {
-            Log.e("JSON", e.getMessage());
-            return null;
-        }
-    }
-
     public static String getMacAddress(String interfaceName) {
 
         try {
