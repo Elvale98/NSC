@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NSC</string>
+    <string name="password">Inserisci la password</string>
+    <string name="email">Inserisci l\' e-mail</string>
+    <string name="login">Login</string>
+    <string name="campi_vuoti">Inserisci tutti i campi</string>
+    <string name="connessione_assente">Connessione assente</string>
+    <string name="benvenuto">Benvenuto in NSC App</string>
+    <string name="logout">Logout</string>
+    <string name="timbra">Timbra</string>
+    <string name="avvicina_il_retro_del_device_al_sensore_aziendale">Avvicina il retro del device al sensore aziendale</string>
+    <string name="Il_tuo_MAC_Address">Il tuo MAC Address</string>
+    <string name="todo">TODO</string>
+
+</resources>
