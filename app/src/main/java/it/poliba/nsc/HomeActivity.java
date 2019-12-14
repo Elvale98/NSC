@@ -38,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
 
         textNome.setText(nomeDipendente);
         textEmail.setText(emailDipendente);
-
+//metodo per la gestione delle azioni da svolgere al momento del click sul pulsante "Logout"
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-
+//metodo per la gestione delle azioni che avvengono al momento del click sul pulsante "Timbra"
         buttonTimbra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
