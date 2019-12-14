@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.btn_login);
-
+//gestisco azioni da compiere al momento del click sul pulsante Login (verifica presenza dipendente nel DB)
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
     }
-
+//da qui in poi si gestisce l'NFC
     @Override
     protected void onResume() {
         super.onResume();
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+//metodo che permette la comunicazione del tag NFC (in scrittura in tal caso)
     private void writeNdefMessage(Tag tag, NdefMessage ndefMessage) {
 
         try {
@@ -250,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
         return ndefMessage;
     }
-
+//metodo per conversione stringa, ottenuta tramite file php (VerificaLogin.php), in formato json 
     private Dipendente decodeJsonDipendente(String dipendenteJson) {
         Dipendente dipendente = new Dipendente();
 
@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
+//metodo per acquisizione indirizzo MAC del dispositivo corrente
     public static String getMacAddress(String interfaceName) {
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
