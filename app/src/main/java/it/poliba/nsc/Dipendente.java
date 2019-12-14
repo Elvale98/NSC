@@ -6,17 +6,15 @@ public class Dipendente {
     private String cognome;
     private String email;
     private String password;
-    private String codUnivoco;
 
     public Dipendente() {}
 
-    public Dipendente(String idDipendente, String nome, String cognome, String email, String password, String codUnivoco) {
+    public Dipendente(String idDipendente, String nome, String cognome, String email, String password) {
         this.idDipendente = idDipendente;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.password = password;
-        this.codUnivoco = codUnivoco;
     }
 
     public String getIdDipendente() {
@@ -58,12 +56,5 @@ public class Dipendente {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getCodUnivoco() {
-        return codUnivoco;
-    }
-
-    public void setCodUnivoco(String codUnivoco) {
-        this.codUnivoco = codUnivoco;
-    }
+    
 }
