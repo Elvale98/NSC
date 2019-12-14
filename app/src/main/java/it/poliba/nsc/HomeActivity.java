@@ -62,4 +62,33 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+    //metodo per leggere indirizzo MAC del dispositivo corrente
+    public static String getMacAddress(String interfaceName) {
+        try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = interfaces.nextElement();
+
+                if (TextUtils.equals(networkInterface.getName(), interfaceName)) {
+                    byte[] bytes = networkInterface.getHardwareAddress();
+                    StringBuilder builder = new StringBuilder();
+                    for (byte b : bytes) {
+                        builder.append(String.format("%02X:", b));
+                    }
+
+                    if (builder.length() > 0) {
+                        builder.deleteCharAt(builder.length() - 1);
+                    }
+
+                    return builder.toString();
+                }
+            }
+
+            return getMacAddress("wlan0");
+
+        } catch (SocketException e) {
+            return "ERRORE";
+        }
+    }
+
 }
