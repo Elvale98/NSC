@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private EditText editTextEmail;
     private Button buttonLogin;
-    NfcAdapter nfcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
             dipendente.setCognome(jsonObj.getString("Cognome"));
             dipendente.setEmail(jsonObj.getString("Email"));
             dipendente.setPassword(jsonObj.getString("Password"));
-            dipendente.setCodUnivoco(jsonObj.getString("Codice_univoco"));
 
             return dipendente;
 
