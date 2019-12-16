@@ -4,19 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.MacAddress;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 public class HomeActivity extends AppCompatActivity {
 
     private TextView textNome;
     private TextView textEmail;
-    private TextView textMACAddress;
     private Button buttonLogout;
     private Button buttonTimbra;
 
@@ -38,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
 
         textNome.setText(nomeDipendente);
         textEmail.setText(emailDipendente);
-//metodo per la gestione delle azioni da svolgere al momento del click sul pulsante "Logout"
+
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,23 +52,21 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-//metodo per la gestione delle azioni che avvengono al momento del click sul pulsante "Timbra"
+
         buttonTimbra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(getApplicationContext(), NFC.class);
-                startActivity(myIntent);
-                Toast.makeText(getApplicationContext(), "IMPLEMENTARE NFC", Toast.LENGTH_LONG).show();
+                setContentView(R.layout.activity_nfc);
 
-                textMACAddress= findViewById(R.id.MACAddress);
                 WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 WifiInfo info = manager.getConnectionInfo();
                 String address = info.getMacAddress();
-                Toast.makeText(getApplicationContext(), "MAC Address: "+ MainActivity.getMacAddress("wlan0"), Toast.LENGTH_LONG).show();
+
+                Toast.makeText(getApplicationContext(), "MAC Address: " + getMacAddress("wlan0"), Toast.LENGTH_SHORT).show();
             }
         });
     }
-    //metodo per leggere indirizzo MAC del dispositivo corrente
+
     public static String getMacAddress(String interfaceName) {
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -90,5 +94,4 @@ public class HomeActivity extends AppCompatActivity {
             return "ERRORE";
         }
     }
-
 }
