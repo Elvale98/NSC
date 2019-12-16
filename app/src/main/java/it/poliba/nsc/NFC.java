@@ -12,10 +12,13 @@ import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.nfc.tech.NdefFormatable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -28,6 +31,9 @@ public class NFC extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
+
+        Intent myIntent = getIntent();
+        String MacAddress = myIntent.getStringExtra(HomeActivity.getMacAddress("wlan0"));
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
@@ -57,13 +63,16 @@ public class NFC extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        if (intent.hasExtra(NfcAdapter.EXTRA_TAG)) {
-            Toast.makeText(this, "NfcIntent!", Toast.LENGTH_SHORT).show();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+            Parcelable[] rawMessages =
+                    intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            if (rawMessages != null) {
+                NdefMessage[] messages = new NdefMessage[rawMessages.length];
+                for (int i = 0; i < rawMessages.length; i++) {
+                    messages[i] = (NdefMessage) rawMessages[i];
+                }
 
-            Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            NdefMessage ndefMessage = createNdefMessage("Il contenuto della mia stringa!");
-
-            writeNdefMessage(tag, ndefMessage);
+                }
         }
     }
 
@@ -82,7 +91,7 @@ public class NFC extends AppCompatActivity {
         nfcAdapter.disableForegroundDispatch(this);
     }
 
-    private void formatTag(Tag tag, NdefMessage ndefMessage) {
+    public void formatTag(Tag tag, NdefMessage ndefMessage) {
         try {
 
             NdefFormatable ndefFormatable = NdefFormatable.get(tag);
@@ -142,7 +151,6 @@ public class NFC extends AppCompatActivity {
 
     }
 
-
     private NdefRecord createTextRecord(String content) {
         try {
             byte[] language;
@@ -165,7 +173,6 @@ public class NFC extends AppCompatActivity {
         return null;
     }
 
-
     private NdefMessage createNdefMessage(String content) {
 
         NdefRecord ndefRecord = createTextRecord(content);
@@ -174,5 +181,4 @@ public class NFC extends AppCompatActivity {
 
         return ndefMessage;
     }
-
 }
